@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite | Alfa 24</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Inline SVG definitions for icons -->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="images/alfa24.png" alt="Alfa 24 Logo" class="logo">
+        </div>
+
+        <nav class="nav-grid">
+            <a href="datenschutz.html" class="nav-link">
+                <div style="display: flex; align-items: center;">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </span>
+                    Datenschutz
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="dokumente.html" class="nav-link">
+                <div style="display: flex; align-items: center;">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </span>
+                    Dokumente
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="todo.html" class="nav-link">
+                <div style="display: flex; align-items: center;">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                    </span>
+                    ToDo
+                </div>
+                <span class="arrow">→</span>
+            </a>
+        </nav>
+
+        <footer class="footer">
+            &copy; 2026 Alfa 24
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="authGuard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Digitaler Arbeitsnachweis – ALFATEC24 GmbH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Externe CSS-Datei -->
+  <link rel="stylesheet" href="arbeitsnachweis.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+    <div id="work-order" class="work-card">
+      <!-- Kopfbereich / Firmenblock -->
+      <header class="header">
+        <div class="header-left">
+          <div class="logo-row">
+            <!-- DEIN LOGO HIER -->
+            <img
+              src="data:image/png;base64,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"
+              alt="ALFATEC24 Logo" class="company-logo" />
+            <div class="logo-text">
+              <div class="company-name">ALFATEC24 GmbH</div>
+              <div class="company-tagline">
+                Digitaler Arbeitsnachweis für Heizungs-, Wärmepumpen- und Bauprojekte
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="company-contact">
+            <div>ALFATEC24 GmbH</div>
+            <div>Schwedenstraße 9, 13359 Berlin</div>
+            <div>Tel: +49 30 49931140</div>
+            <div>Email: <a href="mailto:info@alfatec-24.de">info@alfatec-24.de</a></div>
+          </div>
+
+          <div class="doc-meta">
+            <div>
+              <span>Datum:</span>
+              <strong id="today-date"></strong>
+            </div>
+            <div class="doc-meta-row">
+              <span>Auftrags-Nr.:</span>
+              <input id="job-number" class="meta-input" placeholder="z.B. 2025-001" />
+            </div>
+            <!-- live-pill wurde komplett entfernt -->
+          </div>
+        </div>
+      </header>
+
+      <!-- Auftrag & Kunde -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Auftrag &amp; Kunde</h2>
+          <p class="section-sub">Grunddaten zum Einsatz</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Auftrag / Projekt</span>
+                <span class="hint">Kurzbeschreibung</span>
+              </label>
+              <input id="job-title" class="field-input"
+                placeholder="z.B. Wärmepumpe EFH Müller – Austausch Gastherme" />
+            </div>
+
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Kunde</span>
+                <span class="hint">Name &amp; Adresse</span>
+              </label>
+              <textarea id="customer-info" class="field-textarea"
+                placeholder="z.B. Familie Müller&#10;Beispielstraße 12&#10;12345 Berlin"></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Auftragsart</span>
+                <span class="hint">steuert Materialvorschlag</span>
+              </label>
+              <select id="job-type" class="field-select">
+                <option value="">Bitte wählen...</option>
+                <option value="daikin-heatpump">Wärmepumpe (Daikin)</option>
+                <!-- Weitere Auftragsarten kannst du später hinzufügen -->
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Kurzbeschreibung Arbeiten</span>
+                <span class="hint">optional</span>
+              </label>
+              <textarea id="job-description" class="field-textarea"
+                placeholder="z.B. Außengerät aufgestellt, hydraulischer Anschluss, Inbetriebnahme vorbereitet, Altanlage demontiert..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Materialeinsatz -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Materialeinsatz</h2>
+          <p class="section-sub">
+            Wird anhand der Auftragsart vorbelegt – Mengen eintragen oder anpassen
+          </p>
+        </div>
+
+        <div class="materials-wrapper">
+          <div class="materials-header-row">
+            <div>Material / Position</div>
+            <div class="materials-header-qty">Menge</div>
+            <div>Einheit</div>
+          </div>
+
+          <div id="materials-body">
+            <div class="materials-placeholder">
+              Wähle oben eine <strong>Auftragsart</strong>, um eine Materialliste vorzuschlagen.
+            </div>
+          </div>
+
+          <div class="materials-footer">
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Sonstiges Material / Bemerkungen</span>
+                <span class="hint">alles, was nicht oben erfasst ist</span>
+              </label>
+              <textarea id="materials-notes" class="field-textarea"
+                placeholder="z.B. Kleinmaterial, zusätzliche Ventile, unerwartete Anpassungen..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Arbeitszeiten & Leistung -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Arbeitszeiten &amp; Leistung</h2>
+          <p class="section-sub">Kurz festhalten, was wann gemacht wurde</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Monteur(e)</span>
+                <span class="hint">Namen</span>
+              </label>
+              <input id="technicians" class="field-input" placeholder="Monteur" />
+            </div>
+
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Arbeitszeit</span>
+                <span class="hint">von / bis</span>
+              </label>
+              <input id="work-time" class="field-input" placeholder="z.B. 08:00 – 16:30 Uhr" />
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Leistungsbeschreibung</span>
+                <span class="hint">stichpunktartig</span>
+              </label>
+              <textarea id="work-description" class="field-textarea"
+                placeholder="z.B.&#10;- Alte Gastherme demontiert&#10;- Wärmepumpe hydraulisch eingebunden&#10;- Leitungen gedämmt&#10;- Anlage befüllt und entlüftet"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Unterschriften -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Digitale Unterschriften</h2>
+          <p class="section-sub">Direkt auf dem Display unterschreiben lassen</p>
+        </div>
+
+        <div class="sign-grid">
+          <!-- Monteur -->
+          <div class="sign-card">
+            <div class="sign-label-row">
+              <span class="main">Monteur</span>
+              <span>Bestätigung ausgeführter Arbeiten</span>
+            </div>
+            <div class="sign-canvas-wrapper">
+              <canvas id="signature-tech" class="signature"></canvas>
+              <div class="sign-placeholder">Mit Finger oder Maus unterschreiben</div>
+            </div>
+            <div class="sign-actions">
+              <button type="button" class="btn-ghost" data-clear="signature-tech">
+                Löschen
+              </button>
+            </div>
+          </div>
+
+          <!-- Kunde -->
+          <div class="sign-card">
+            <div class="sign-label-row">
+              <span class="main">Kunde</span>
+              <span>Auftrag &amp; Leistung sind vereinbart / erfolgt</span>
+            </div>
+            <div class="sign-canvas-wrapper">
+              <canvas id="signature-customer" class="signature"></canvas>
+              <div class="sign-placeholder">Kunde unterschreibt hier</div>
+            </div>
+            <div class="sign-actions">
+              <button type="button" class="btn-ghost" data-clear="signature-customer">
+                Löschen
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-note">
+        Dieser Arbeitsnachweis gehört zur ALFATEC24 GmbH – bitte sorgfältig ausfüllen und
+        vom Kunden unterschreiben lassen.
+      </footer>
+    </div>
+
+    <!-- Hinweis & Button unten rechts
+    <div class="submit-note">
+      Der Arbeitsnachweis wird als Bild gespeichert.
+      Du kannst ihn anschließend z.B. per E-Mail weiterleiten.
+    </div>
+-->
+    <div class="fab-container">
+      <a href="dokumente.html" class="btn-fab secondary" title="Zurück">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </a>
+      <button id="send-button" class="btn-fab" title="Speichern & Abschließen" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+          <polyline points="17 21 17 13 7 13 7 21"></polyline>
+          <polyline points="7 3 7 8 15 8"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-title">Erfolgreich gespeichert</div>
+      <div class="modal-text">
+        1. Das Protokoll wurde im <strong>Archiv</strong> abgelegt.<br>
+        2. Die <strong>PDF-Datei</strong> wurde heruntergeladen.
+      </div>
+      <div class="modal-actions">
+        <a id="email-btn-link" href="#" class="btn-email">
+          E-Mail Programm öffnen
+        </a>
+        <div style="font-size: 0.8rem; color: #94a3b8;">
+          (Bitte PDF manuell anhängen)
+        </div>
+        <button class="btn-close" onclick="closeModal()">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="arbeitsnachweis.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="authGuard.js"></script>
+  <script src="db.js"></script>
+</body>
+
+</html>

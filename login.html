@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Alfa 24</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            background-color: #f8fafc;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-logo {
+            height: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #00bcd4;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.85rem;
+            background: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #06b6d4;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <img src="images/alfa24.png" alt="Alfa 24" class="login-logo">
+        <h1 class="login-title">Anmeldung</h1>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label class="input-label">E-Mail Adresse</label>
+                <input type="email" class="input-field" placeholder="max@alfa24.de" required>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Passwort</label>
+                <input type="password" class="input-field" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-login">Anmelden</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="authGuard.js"></script>
+
+    <script>
+        async function handleLogin(e) {
+            e.preventDefault();
+
+            const email = document.querySelector('input[type="email"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+            const btn = document.querySelector('.btn-login');
+
+            try {
+                btn.textContent = "Lade...";
+                btn.disabled = true;
+
+                const { data, error } = await window.supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) throw error;
+
+                // Success - authGuard will redirect usually, but let's force it
+                window.location.href = 'index.html';
+
+            } catch (err) {
+                alert("Login fehlgeschlagen: " + err.message);
+                btn.textContent = "Anmelden";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

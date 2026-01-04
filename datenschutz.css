@@ -1,0 +1,471 @@
+:root {
+  --bg: #f3f4f6;
+  --card-bg: #ffffff;
+  --section-bg: #f9fafb;
+  --accent: #f97316; /* Bau-Orange */
+  --accent-soft: rgba(249, 115, 22, 0.06);
+  --accent-strong: #ea580c;
+  --border-subtle: #e5e7eb;
+  --border-strong: #d1d5db;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-soft: #9ca3af;
+  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.15);
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #e5e7eb 0, #f9fafb 40%, #e5e7eb 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  padding: 20px 24px 24px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.company-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.company-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.company-tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.company-contact {
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.company-contact a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.company-contact a:hover {
+  text-decoration: underline;
+}
+
+.doc-meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.doc-meta > div {
+  margin-bottom: 2px;
+}
+
+.doc-meta span {
+  color: var(--text-soft);
+}
+
+.doc-meta strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Sections */
+.section {
+  background: var(--section-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: 14px 14px 12px;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.intro-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.body-text {
+  font-size: 13px;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.body-text.notice {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.body-text a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+
+.body-text a:hover {
+  text-decoration: underline;
+}
+
+.list {
+  font-size: 13px;
+  color: var(--text-main);
+  padding-left: 18px;
+  margin-bottom: 6px;
+}
+
+.list li {
+  margin-bottom: 3px;
+}
+
+/* Sign-Bereich */
+.section-sign {
+  margin-top: 4px;
+}
+
+.sign-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.field-label {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.field-label .main {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.field-input {
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: #ffffff;
+  padding: 7px 9px;
+  font-size: 13px;
+  color: var(--text-main);
+  outline: none;
+  width: 100%;
+  transition: border 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
+}
+
+.field-input::placeholder {
+  color: var(--text-soft);
+}
+
+.field-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.3);
+  background: #ffffff;
+}
+
+.field-inline {
+  display: flex;
+  gap: 8px;
+}
+
+.field-half {
+  flex: 1;
+}
+
+/* Signaturkarte */
+.sign-card {
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: #ffffff;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sign-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.sign-label-row .main {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.sign-canvas-wrapper {
+  border-radius: 10px;
+  border: 1px dashed var(--border-strong);
+  background: #f9fafb;
+  overflow: hidden;
+  position: relative;
+}
+
+canvas.signature {
+  display: block;
+  width: 100%;
+  height: 130px;
+  background: #ffffff;
+  cursor: crosshair;
+}
+
+.sign-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+.sign-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.btn-ghost {
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: #ffffff;
+  padding: 4px 9px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border 0.14s ease, background 0.14s ease, color 0.14s ease,
+    box-shadow 0.14s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background: #fff7ed;
+  color: var(--accent-strong);
+  box-shadow: 0 1px 5px rgba(15, 23, 42, 0.15);
+}
+
+/* Footer */
+.footer-note {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+/* Submit Button + Hinweis */
+.submit-note {
+  position: absolute;
+  right: 24px;
+  bottom: 72px;
+  font-size: 11px;
+  color: var(--text-soft);
+  max-width: 280px;
+  text-align: right;
+}
+
+.submit-note strong {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.floating-action {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #ffffff;
+  box-shadow: 0 16px 30px rgba(180, 83, 9, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 18px 40px rgba(180, 83, 9, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 10px 24px rgba(180, 83, 9, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  body {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 16px 14px 18px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-right {
+    align-items: flex-start;
+  }
+
+  .company-contact {
+    text-align: left;
+  }
+
+  .submit-note {
+    right: 14px;
+    bottom: 64px;
+  }
+
+  .floating-action {
+    right: 14px;
+    bottom: 18px;
+  }
+
+  .sign-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* FAB Container */
+.fab-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 1rem;
+    z-index: 100;
+}
+
+.btn-fab {
+    background: #00bcd4;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-decoration: none;
+}
+
+.btn-fab.secondary {
+    background: #fff;
+    color: #334155;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn-fab:hover {
+    transform: scale(1.05);
+}

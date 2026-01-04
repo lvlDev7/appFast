@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abnahmeprotokoll WP | Alfa 24</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Reusing existing styles for consistency -->
+    <link rel="stylesheet" href="arbeitsnachweis.css">
+
+    <style>
+        /* Specific overrides for this page */
+        body {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .check-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #334155;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"],
+        .radio-item input[type="checkbox"] {
+            width: 1.2rem;
+            height: 1.2rem;
+            accent-color: #00bcd4;
+            cursor: pointer;
+        }
+
+        .section-sub-header {
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+            font-size: 1.05rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        /* FAB Container */
+        .fab-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .btn-fab {
+            background: #00bcd4;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-fab.secondary {
+            background: #fff;
+            color: #334155;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-fab:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-shell">
+        <div id="protocol-form" class="work-card">
+
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <div class="logo-row">
+                        <img src="images/alfa24.png" alt="ALFATEC24 Logo" class="company-logo">
+                        <div class="logo-text">
+                            <div class="company-name">ALFATEC24 GmbH</div>
+                            <div class="company-tagline">Fachbetrieb für Wärmepumpen & Haustechnik</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="doc-meta">
+                        <div>
+                            <span>Datum:</span>
+                            <input type="date" id="doc-date" class="meta-input" style="width: 140px;">
+                        </div>
+                        <div class="doc-meta-row">
+                            <span>Auftrags-Nr.:</span>
+                            <input id="job-number" class="meta-input" placeholder="z.B. WP-2026-001">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Inbetriebnahmeprotokoll Wärmepumpe</h2>
+                    <p class="section-sub">Dokumentation der technischen Daten & Abnahme</p>
+                </div>
+
+                <!-- Customer & Site Info -->
+                <div class="grid-2">
+                    <div>
+                        <div class="field">
+                            <label class="field-label">
+                                <span class="main">Kunde / Anlagenbetreiber</span>
+                            </label>
+                            <textarea id="customer-address" class="field-textarea"
+                                placeholder="Name, Straße, PLZ, Ort"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="field">
+                            <label class="field-label">
+                                <span class="main">Standort der Anlage</span>
+                                <span class="hint">(falls abweichend)</span>
+                            </label>
+                            <textarea id="site-address" class="field-textarea"
+                                placeholder="Straße, PLZ, Ort"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Anlagendaten -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Anlagendaten & Installation</h2>
+                </div>
+
+                <!-- Wärmepumpenart (NEW) -->
+                <div class="field">
+                    <label class="field-label"><span class="main">Wärmepumpenart</span></label>
+                    <div class="field-select-wrapper">
+                        <select id="wp-type" class="field-select">
+                            <option value="">Bitte wählen...</option>
+                            <option value="sole-wasser">Sole / Wasser</option>
+                            <option value="luft-wasser">Luft / Wasser</option>
+                            <option value="wasser-wasser">Wasser / Wasser</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <div class="field">
+                            <label class="field-label"><span class="main">Hersteller / Fabrikat</span></label>
+                            <input class="field-input" id="manufacturer" placeholder="z.B. Daikin, Viessmann">
+                        </div>
+                        <div class="field">
+                            <label class="field-label"><span class="main">Modell Innengerät</span></label>
+                            <input class="field-input" id="model-indoor" placeholder="">
+                        </div>
+                        <div class="field">
+                            <label class="field-label"><span class="main">Seriennummer Innengerät</span></label>
+                            <input class="field-input" id="serial-indoor" placeholder="">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="field">
+                            <label class="field-label"><span class="main">Modell Außengerät</span></label>
+                            <input class="field-input" id="model-outdoor" placeholder="">
+                        </div>
+                        <div class="field">
+                            <label class="field-label"><span class="main">Seriennummer Außengerät</span></label>
+                            <input class="field-input" id="serial-outdoor" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rückbau & Erdleitung (NEW) -->
+                <div class="section-sub-header">Installation & Erdarbeiten</div>
+
+                <div class="check-grid" style="margin-bottom: 1rem;">
+                    <label class="radio-item">
+                        <input type="checkbox" id="check-dismantling">
+                        <span>Rückbau und Entsorgung der alten Anlage erfolgt</span>
+                    </label>
+                </div>
+
+                <div class="grid-2">
+                    <div class="field">
+                        <label class="field-label"><span class="main">Verlegte Erdleitung (Länge in m)</span></label>
+                        <input class="field-input" type="number" id="pipe-ground-length" placeholder="Meter">
+                    </div>
+                    <div class="field">
+                        <label class="field-label"><span class="main">Dimension (DN)</span></label>
+                        <input class="field-input" id="pipe-ground-dn" placeholder="z.B. DN 32">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Heizsystem & Hydraulik -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Heizsystem & Hydraulik</h2>
+                </div>
+
+                <!-- Heizsystem (NEW) -->
+                <div class="field">
+                    <label class="field-label"><span class="main">Heizsystem / Wärmeabgabe</span></label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="heat-system" value="fbh">
+                            <span>Fußbodenheizung</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="heat-system" value="hk">
+                            <span>Heizkörper</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="heat-system" value="mix">
+                            <span>Mischsystem</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Speicher & Weiche (NEW) -->
+                <div class="grid-2" style="margin-top: 1rem;">
+                    <div class="field">
+                        <label class="field-label"><span class="main">Pufferspeicher vorhanden?</span></label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="buffer" value="yes"> Ja</label>
+                            <label class="radio-item"><input type="radio" name="buffer" value="no"> Nein</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="field-label"><span class="main">Hydraulische Weiche vorhanden?</span></label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="switch" value="yes"> Ja</label>
+                            <label class="radio-item"><input type="radio" name="switch" value="no"> Nein</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Befüllung (NEW) -->
+                <div class="section-sub-header">Anlagenbefüllung (VDI 2035)</div>
+                <div class="field">
+                    <div class="radio-group" style="margin-bottom: 0.5rem;">
+                        <label class="radio-item">
+                            <input type="radio" name="filling" value="full">
+                            <span>Komplett befüllt</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="filling" value="partial">
+                            <span>Teilbefüllt</span>
+                        </label>
+                    </div>
+                    <textarea id="filling-note" class="field-textarea"
+                        placeholder="Notiz zur Befüllung (z.B. Wasserwerte, Mengen, Zusätze)..."></textarea>
+                </div>
+
+                <!-- Prüfungen (RESTORED) -->
+                <div class="section-sub-header">Hydraulische Prüfungen</div>
+                <div class="check-grid">
+                    <div class="check-item">
+                        <input type="checkbox" id="check-pressure">
+                        <label for="check-pressure">Anlagendruck korrekt (ca. 1.5 - 2.0 bar)</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check-vented">
+                        <label for="check-vented">System gespült und vollständig entlüftet</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check-valves">
+                        <label for="check-valves">Alle Absperrventile geöffnet</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check-filter">
+                        <label for="check-filter">Schlammabscheider / Filter kontrolliert</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Montage & Aufstellung (RESTORED) -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Montage & Aufstellung</h2>
+                </div>
+                <div class="check-grid">
+                    <div class="check-item">
+                        <input type="checkbox" id="check-condensate">
+                        <label for="check-condensate">Kondensatablauf geprüft (Funktionstest)</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check-vibration">
+                        <label for="check-vibration">Schwingungsdämpfer montiert</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check-insulation">
+                        <label for="check-insulation">Rohrleitungen vollständig gedämmt</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check-min-dist">
+                        <label for="check-min-dist">Mindestabstände eingehalten</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customer Instruction (RESTORED) -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Einweisung des Betreibers</h2>
+                </div>
+                <div class="check-grid">
+                    <div class="check-item">
+                        <input type="checkbox" id="instr-operation">
+                        <label for="instr-operation">Bedienung Regler erklärt</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="instr-pressure">
+                        <label for="instr-pressure">Nachfüllen von Wasser erklärt</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="instr-maintenance">
+                        <label for="instr-maintenance">Wartungsintervalle hingewiesen</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="instr-docs">
+                        <label for="instr-docs">Unterlagen übergeben</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Notes (NEW) -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Weitere Anmerkungen</h2>
+                </div>
+                <textarea id="additional-notes" class="field-textarea" style="min-height: 100px;"
+                    placeholder="Platz für weitere Bemerkungen, Absprachen oder offene Punkte..."></textarea>
+            </section>
+
+            <!-- Signatures (UNCHANGED) -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Unterschriften</h2>
+                    <p class="section-sub">Bestätigung der ordnungsgemäßen Installation und Einweisung</p>
+                </div>
+
+                <div class="sign-grid">
+                    <!-- Technician Signature -->
+                    <div class="sign-card">
+                        <div class="sign-label-row">
+                            <span class="main">Fachhandwerker</span>
+                            <span>(Inbetriebnehmer)</span>
+                        </div>
+                        <div class="sign-canvas-wrapper">
+                            <!-- Reusing ID names compatible with existing JS or new JS -->
+                            <canvas id="signature-tech" class="signature"></canvas>
+                            <div class="sign-placeholder">Hier unterschreiben</div>
+                        </div>
+                        <div class="sign-actions">
+                            <button type="button" class="btn-ghost" data-clear="signature-tech">Löschen</button>
+                        </div>
+                    </div>
+
+                    <!-- Customer Signature -->
+                    <div class="sign-card">
+                        <div class="sign-label-row">
+                            <span class="main">Kunde / Auftraggeber</span>
+                            <span>(Bestätigung Abnahme)</span>
+                        </div>
+                        <div class="sign-canvas-wrapper">
+                            <canvas id="signature-customer" class="signature"></canvas>
+                            <div class="sign-placeholder">Hier unterschreiben</div>
+                        </div>
+                        <div class="sign-actions">
+                            <button type="button" class="btn-ghost" data-clear="signature-customer">Löschen</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer-note">
+                Dieses Protokoll dient als Nachweis für die ordnungsgemäße Installation und Einweisung.
+            </footer>
+
+            <!-- Spacing for FAB -->
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+
+    <!-- Floating Actions -->
+    <div class="fab-container">
+        <a href="dokumente.html" class="btn-fab secondary" title="Zurück">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+        </a>
+        <button id="save-btn" class="btn-fab" title="Speichern & Abschließen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <!-- html2pdf Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- External Script -->
+    <script src="abnahmeWp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="authGuard.js"></script>
+    <script src="db.js"></script>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-title">Erfolgreich gespeichert</div>
+            <div class="modal-text">
+                1. Das Protokoll wurde im <strong>Archiv</strong> abgelegt.<br>
+                2. Die <strong>PDF-Datei</strong> wurde heruntergeladen.<br><br>
+                Möchten Sie die PDF jetzt per E-Mail versenden?
+            </div>
+            <div class="modal-actions">
+                <a id="email-btn-link" href="#" class="btn-email">
+                    E-Mail Programm öffnen
+                </a>
+                <div style="font-size: 0.8rem; color: #94a3b8;">
+                    (Bitte PDF manuell anhängen)
+                </div>
+                <button class="btn-close" onclick="closeModal()">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archiv | Alfa 24</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .archive-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .archive-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .archive-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: #00bcd4;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1.1rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #94a3b8;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="index.html" class="logo-container" style="text-decoration: none;">
+            <img src="images/alfa24.png" alt="Alfa 24 Logo" class="logo">
+        </a>
+
+        <div style="width: 100%; text-align: left; margin-bottom: -1rem; padding-left: 0.5rem;">
+            <h2 style="font-weight: 600; color: var(--text-color);">Archiv</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Gespeicherte Protokolle</p>
+        </div>
+
+        <div id="archive-container" class="archive-list">
+            <!-- Items injected by JS -->
+        </div>
+
+        <nav class="nav-grid" style="margin-top: 2rem;">
+            <a href="dokumente.html" class="nav-link"
+                style="background: transparent; border: 1px solid var(--text-color); color: var(--text-color);">
+                <div style="display: flex; align-items: center;">
+                    <span class="icon" style="background: rgba(0,0,0,0.05); color: var(--text-color);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                    </span>
+                    Zurück
+                </div>
+            </a>
+        </nav>
+
+        <footer class="footer">
+            &copy; 2026 Alfa 24
+        </footer>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('archive-container');
+
+        async function initArchive() {
+            // Fetch from DB
+            const protocols = await fetchDocumentsFromDb();
+
+            if (protocols.length === 0) {
+                container.innerHTML = '<div class="empty-state">Keine gespeicherten Dokumente gefunden.</div>';
+            } else {
+                protocols.forEach(p => {
+                    const dateObj = new Date(p.created_at);
+                    const dateStr = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    // Determine Target URL
+                    let targetUrl = 'abnahmeWp.html';
+                    if (p.type === 'Arbeitsnachweis') targetUrl = 'arbeitsnachweis.html';
+                    if (p.type === 'Datenschutz') targetUrl = 'datenschutz.html';
+                    if (p.type === 'Inbetriebnahmeprotokoll' || p.type === 'Abnahmeprotokoll') targetUrl = 'abnahmeWp.html';
+
+                    const card = document.createElement('a');
+                    card.className = 'archive-item';
+                    card.href = targetUrl + '?id=' + p.id;
+
+                    card.innerHTML = `
+                         <div class="item-header">
+                             <span>${dateStr}</span>
+                             <span>${p.type || 'Dokument'}</span>
+                         </div>
+                         <div class="item-title">${p.customer_name || 'Unbekannter Kunde'}</div>
+                     `;
+                    container.appendChild(card);
+                });
+            }
+        }
+
+        window.addEventListener('load', () => {
+            // Small delay for Supabase client
+            setTimeout(initArchive, 500);
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="authGuard.js"></script>
+    <script src="db.js"></script>
+</body>
+
+</html>
