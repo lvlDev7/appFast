@@ -138,7 +138,7 @@ if (saveBtn) {
 
             }).catch(err => {
                 console.error("PDF Error:", err);
-                alert('Fehler bei der PDF-Erstellung. Daten im Archiv gesichert.');
+                alert('Fehler bei der PDF-Erstellung. Daten im Archiv gesichert.\n\nDetail: ' + (err.message || err));
             });
 
         } catch (e) {
@@ -226,4 +226,3 @@ document.querySelectorAll('[data-clear]').forEach(btn => {
         }
     });
 });
-

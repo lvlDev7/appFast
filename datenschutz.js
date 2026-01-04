@@ -75,7 +75,10 @@ function initSignatureCanvas(canvasId) {
 
   let drawing = false;
 
-  function start(e) { drawing = true; draw(e); }
+  function start(e) {
+    drawing = true;
+    draw(e);
+  }
   function end() { drawing = false; ctx.beginPath(); }
   function draw(e) {
     if (!drawing) return;

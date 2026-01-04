@@ -154,7 +154,10 @@ function initSignatureCanvas(canvasId) {
 
   let drawing = false;
 
-  function start(e) { drawing = true; draw(e); }
+  function start(e) {
+    drawing = true;
+    draw(e);
+  }
   function end() { drawing = false; ctx.beginPath(); }
   function draw(e) {
     if (!drawing) return;
@@ -231,6 +234,9 @@ if (saveBtn) {
 
         if (emailLink) emailLink.href = `mailto:${email}?subject=${subject}&body=${body}`;
         if (successModal) successModal.classList.add('active');
+      }).catch(err => {
+        console.error("PDF Error:", err);
+        alert('PDF Fehler: ' + (err.message || err) + '\n\nDaten wurden trotzdem gespeichert.');
       });
 
     } catch (e) {
